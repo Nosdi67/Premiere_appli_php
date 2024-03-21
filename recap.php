@@ -52,7 +52,7 @@ session_start();
         }
         echo "<style>
                 table {
-                    margin:300px 700px;
+                    margin:auto;
                     border-radius: 20px;
                     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
                     width: 600px;
@@ -61,8 +61,32 @@ session_start();
                     padding:20px;
                 }
                 table th{
-                    background-color: #4CAF50;
+                    background-color: #0d6efd;
                     color: white;
+                    border-radius: 10px;
+                    text-align:center;
+                }
+                nav{
+                    display : flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                a{
+                    border-radius: 10px;
+                    padding: 10px;
+                    margin: 10px;
+                    text-decoration: none;
+                    color: white;
+                    background-color: #0d6efd;
+                    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0,
+                    0, 0.09) 0px -3px 5px;
+                    transition: 0.3s;
+                    cursor: pointer;
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    border: none;
+                    outline: none;
+                    text-align: center;
                 }
         
                  "
