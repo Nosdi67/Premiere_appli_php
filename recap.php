@@ -1,18 +1,9 @@
 <?php
 session_start();
+ob_start();
+$title="Recapitulatif";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Récapitulatif des produits</title>
-</head>
-<body>
-    <nav>
-    <a href="index.php" class="btn btn-primary d-inline-flex align-items-center">Accueil</a>
-    </nav>
+  
     <?php //Cette condition vérifie si le tableau $_SESSION['products'] n'est pas défini ou est vide avant d'ajouter un produit.
         if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
             echo "Vous n'avez ajouté aucun produit.";
@@ -34,31 +25,48 @@ session_start();
             $totalGeneral=0;
             foreach($_SESSION['products'] as $key => $product){
                 echo "<tr>",
-                "<td>", $key, "</td>",
+                "<td>","<a href='traitement.php?action=deleteProductLine&id=", $product['id'],"'><i class='fa-solid fa-trash'></i></a>", $key, "</td>",
                 "<td>", $product['name'], "</td>",
                 "<td>", number_format($product['price'],2,",","&nbsp;"), "&nbsp","</td>",
-                "<td>", $product['quantity'], "</td>",
+                "<td>","<a href='traitement.php?action=down&id=", $product['id'],"'>-</a>", $product['quantity'],"<a href='traitement.php?action=up&id=", $product['id'],"'>+</a>","</td>",
                 "<td>", number_format($product['total'],2,",","&nbsp;" ),"&nbsp","</td>",
                 "</tr>";
                 $totalGeneral+=$product['total'];
+        } 
+
+            $countProducts=count($_SESSION['products']);
+            if($countProducts!=0){
+                echo $countProducts;
             }
 
             echo "<tr>",
             "<td colspan='4'>Total général</td>",//colspan='4' définit que cette cellule doit s'étendre sur 4 colonnes
             "<td><strong>", number_format($totalGeneral,2,",","&nbsp;"), "&nbsp","</strong></td>",
             "</tr>",
+            "<tr class='boutons'>",
+            "<td><a href='traitement.php?action=clear'>Vider le panier</a></td>",
+            "<td><a>Payer</a></td>",
             "</tbody>",
             "</table>";
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         echo "<style>
                 table {
                     margin:auto;
-                    border-radius: 20px;
                     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-                    width: 600px;
+                    width: 500px;
                     height: 500px;
                     text-align:justify;
-                    padding:20px;
+                    padding:10px;
                 }
                 table th{
                     background-color: #0d6efd;
@@ -82,15 +90,26 @@ session_start();
                     0, 0.09) 0px -3px 5px;
                     transition: 0.3s;
                     cursor: pointer;
-                    font-size: 1.2em;
+                    font-size: 1.1em;
                     font-weight: bold;
                     border: none;
                     outline: none;
-                    text-align: center;
+                    text-align: justify;
                 }
-        
-                 "
-                
-    ?>
-</body>
-</html>
+                td a{
+                    max-height: 30px;
+                    max-width: 30px;
+                    font-size: 11px;
+                }
+               .boutons{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width:200px;
+                }",
+               "</style>"; 
+              
+
+$recapContent=ob_get_clean();
+require_once 'template.php';
+?>
