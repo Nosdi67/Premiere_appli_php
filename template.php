@@ -12,8 +12,8 @@
 <body>
     <div id="wrapper">
         <nav>
-            <a href="index.php" class="btn btn-primary d-inline-flex align-items-center">Accueil</a>
-            <a href="recap.php" class="btn btn-primary d-inline-flex align-items-center">Panier<span><?php if(isset($countProducts) && $countProducts != 0) { echo $countProducts; } ?></span></a>
+            <a href="index.php" class="btn btn-primary d-inline-flex align-items-center">Accueil</a>             
+            <a href="recap.php" class="btn btn-primary d-inline-flex align-items-center">Panier<span <?php if(isset($countProducts) && $countProducts==0){ echo "style='background-color:red;'"; echo $countProducts=0;} ?> ><?php if(isset($countProducts)) { echo $countProducts; } ?></span></a>
         </nav>
 
     <?php if(isset($content)) { echo $content; } ?>
@@ -38,7 +38,15 @@
         background-color: #17a2b8;
         color: #fff;
     }
+    #wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
 </style>
+<?php require_once 'function.php'; ?>
 
 
 

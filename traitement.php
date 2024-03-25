@@ -28,10 +28,14 @@ if(isset($_GET['action'])){
                     $_SESSION['products'][] = $product;//$_session c'est une superglobale qui permet de stocker des données côté serveur entre plusieurs requêtes HTTP
                                                     //dans cette session on stocke un tableau de produits
                                                     //[] signifie qu'on ajoute le $produit saisie a la fin du tableau
-
+                    echo $_SESSION['success_message'] = 'Le produit a bien été ajouté.';
                     header("Location:index.php"); exit;//redirection vers la page index.php
+                }else{
+                    echo $_SESSION['error_message'] = 'Veuillez remplir le formulaire correctement.';
+                    header("Location:index.php"); exit;
                 } 
-            }
+            
+            }           
                             break;
             
                     // supprimer un produit
@@ -43,7 +47,9 @@ if(isset($_GET['action'])){
                                     unset($_SESSION['products'][$key]);
                                     break;
                                 }
+                                
                             }
+                            echo $_SESSION['delete_message'] = 'Le produit a bien été supprimé.';
                             header("Location: recap.php");
                             exit;
                         }
@@ -94,4 +100,5 @@ if(isset($_GET['action'])){
                              break;
     }
 }
-?>
+
+?>;

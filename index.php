@@ -2,9 +2,10 @@
     session_start();
     ob_start();
     $title="Accueil";
+    require_once 'function.php'
 ?>
 
-        
+
         <h1>Ajouter un produit</h1>
         <form action="traitement.php?action=add" method="post">
             <p>
@@ -24,14 +25,71 @@
         </form>
     </div>
 
-    <?php
-    $countProducts=0;
-    if(isset($_SESSION['products']) && is_array($_SESSION['products'])) {
-        $countProducts = count($_SESSION['products']);
-    }
-    
-    echo $countProducts; 
 
+    
+    
+    <style>
+        #error_message{
+            color: #f5f5f5;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            background-color: #dc3545;
+            font-size: 1.5rem;
+            text-align: center;
+            
+        }
+        #success_message{
+            color: #f5f5f5;
+            width: 400px;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            background-color: #0d6efd;
+            font-size: 1.5rem;
+            text-align: center;
+            ;
+        }
+        
+        form {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        width: 400px;
+        height: 400px;
+        margin: auto;
+        }
+        p{
+            display: flex;
+            flex-direction: column;
+        }
+        nav{
+            display : flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        h1{
+            text-align: center;
+        }
+        input{
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            background-color: #f5f5f5;
+        }
+    </style>
+
+    <?php 
     $content=ob_get_clean();
     require_once 'template.php';
     ?>

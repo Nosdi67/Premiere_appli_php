@@ -2,12 +2,16 @@
 session_start();
 ob_start();
 $title="Recapitulatif";
+require_once 'function.php'
 ?>
   
-    <?php //Cette condition vérifie si le tableau $_SESSION['products'] n'est pas défini ou est vide avant d'ajouter un produit.
-        if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
-            echo "Vous n'avez ajouté aucun produit.";
-        }
+     <!-- //Cette condition vérifie si le tableau $_SESSION['products'] n'est pas défini ou est vide avant d'ajouter un produit. -->
+     <?php if(!isset($_SESSION['products']) || empty($_SESSION['products'])){?>
+        <div id="message_vide">
+            <div><?php echo "Aucun produit dans le panier"  ?></div>
+        </div> 
+    
+    <?php }
         else{
             
             echo
@@ -34,10 +38,6 @@ $title="Recapitulatif";
                 $totalGeneral+=$product['total'];
         } 
 
-            $countProducts=count($_SESSION['products']);
-            if($countProducts!=0){
-                echo $countProducts;
-            }
 
             echo "<tr>",
             "<td colspan='4'>Total général</td>",//colspan='4' définit que cette cellule doit s'étendre sur 4 colonnes
@@ -49,13 +49,6 @@ $title="Recapitulatif";
             "</tbody>",
             "</table>";
         }
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -113,3 +106,30 @@ $title="Recapitulatif";
 $recapContent=ob_get_clean();
 require_once 'template.php';
 ?>
+
+<style>
+    #message_vide{
+        padding: 50px 100px;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px;
+        text-align: center;
+    }
+    #delete_message{
+        color: #f5f5f5;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            background-color: #dc3545;
+            font-size: 1.5rem;
+            text-align: center;
+    }
+</style>
