@@ -44,3 +44,5 @@ if(isset($_SESSION['products']) && is_array($_SESSION['products'])) {
             }, 3000);
         </script>
     <?php endif; ?> 
+
+ 

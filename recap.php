@@ -2,7 +2,9 @@
 session_start();
 ob_start();
 $title="Recapitulatif";
-require_once 'function.php'
+require_once 'function.php';
+
+
 ?>
   
      <!-- //Cette condition vérifie si le tableau $_SESSION['products'] n'est pas défini ou est vide avant d'ajouter un produit. -->
@@ -26,10 +28,11 @@ require_once 'function.php'
                 "</tr>",
             "</thead>",
             "<tbody>";
+            
             $totalGeneral=0;
             foreach($_SESSION['products'] as $key => $product){
                 echo "<tr>",
-                "<td>","<a href='traitement.php?action=deleteProductLine&id=", $product['id'],"'><i class='fa-solid fa-trash'></i></a>", $key, "</td>",
+                "<td>","<a href='traitement.php?action=deleteProductLine&id=", $product['id'],"'><i class='fa-solid fa-trash'></i></a>", $key,"<img src='".$product['image']."'/>","</td>",
                 "<td>", $product['name'], "</td>",
                 "<td>", number_format($product['price'],2,",","&nbsp;"), "&nbsp","</td>",
                 "<td>","<a href='traitement.php?action=down&id=", $product['id'],"'>-</a>", $product['quantity'],"<a href='traitement.php?action=up&id=", $product['id'],"'>+</a>","</td>",
@@ -54,18 +57,18 @@ require_once 'function.php'
         
         echo "<style>
                 table {
-                    margin:auto;
                     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-                    width: 500px;
-                    height: 500px;
+                    width: 600px;
+                    height: 700px;
                     text-align:justify;
-                    padding:10px;
+                    margin:auto;  
                 }
-                table th{
+                tr th{
                     background-color: #0d6efd;
                     color: white;
-                    border-radius: 10px;
-                    text-align:center;
+                    border-radius: 80px;
+                    text-align:justify;
+                    margin:10px;
                 }
                 nav{
                     display : flex;
@@ -90,8 +93,6 @@ require_once 'function.php'
                     text-align: justify;
                 }
                 td a{
-                    max-height: 30px;
-                    max-width: 30px;
                     font-size: 11px;
                 }
                .boutons{
@@ -105,6 +106,7 @@ require_once 'function.php'
 
 $recapContent=ob_get_clean();
 require_once 'template.php';
+
 ?>
 
 <style>
@@ -131,5 +133,10 @@ require_once 'template.php';
             background-color: #dc3545;
             font-size: 1.5rem;
             text-align: center;
+    }
+    img{
+        height: 100px;
+        width: 100px;
+        margin-left: 10px;
     }
 </style>
