@@ -21,7 +21,7 @@ if(isset($_GET['action'])){
                 if($name && $price && $qtt && $image){ //si le nom l'age et la quantités sont valide,
                     
                     $imageDir = "images/";
-                    $imageName=str_replace(' " ','_',$image['name']);
+                    $imageName=htmlspecialchars($image['name']);
                     $tabExtension=explode(' ',$image['name']);
                     $extension=strtolower(end($tabExtension));
                     $validExtensions = ['jpg','jpeg','gif','png'];
@@ -33,7 +33,7 @@ if(isset($_GET['action'])){
                         echo "Invalid file type.";
                     }
                     $image['id']=uniqid('',true);
-                    $imageDir ="images/".$image['id'].$imageName;
+                    $imageDir ="images/".$image['id'].$extension;
                    
                 if(move_uploaded_file($image["tmp_name"], $imageDir)) {
                     $product = [
@@ -67,6 +67,9 @@ if(isset($_GET['action'])){
                             $id = $_GET['id'];
                             foreach($_SESSION['products'] as $key => $product){
                                 if($product['id'] == $id){
+                                    if(file_exists($product['image'])){
+                                        unlink($product['image']);
+                                    }
                                     unset($_SESSION['products'][$key]);
                                     break;
                                 }
@@ -81,9 +84,14 @@ if(isset($_GET['action'])){
         
                     // vider le panier
                     case "clear":
+                        foreach ($_SESSION['products'] as $product) {
+                            if (file_exists($product['image'])) {
+                                unlink($product['image']);
+                            }
+                        }
+                        
                         unset($_SESSION["products"]);
-                            header("Location: recap.php"); exit;
-            
+                        header("Location: recap.php"); exit;
                             break;
                     // augmenter la quantité
                         case "up":
@@ -121,6 +129,7 @@ if(isset($_GET['action'])){
                             exit;
                 }
                              break;
+
     }
 }
 
